@@ -286,58 +286,7 @@
       });
 
 </script>
-<script>
-        // Function to handle text change and translation
-        document.getElementById('source-text').addEventListener('change', function() {
-            // Gather inputs
-            const sourceText = document.getElementById('source-text').value.trim();
-            const targetLang = document.getElementById('target-language').value;
 
-            // Check if source text is not empty
-            if (sourceText === "") {
-                alert("Please enter text to translate.");
-                return;
-            }
-
-            if (targetLang === "") {
-                alert("Please select a target language.");
-                return;
-            }
-
-            // Prepare request data
-            const requestData = {
-                text_to_translate: sourceText,
-                target_language: targetLang
-            };
-
-            // Send request to the API
-            fetch('http://54.144.156.232:8000/app/translate/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestData)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.translated_text) {
-                    document.getElementById('translated-text').value = data.translated_text;
-                } else {
-                    alert("Translation failed: " + (data.error || "Unknown error"));
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("An error occurred while translating. Please try again.");
-            });
-        });
-
-</script>
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
